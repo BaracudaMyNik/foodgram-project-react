@@ -62,7 +62,7 @@ jobs:
           file: frontend/Dockerfile
 
   deploy:
-    name: Deploy on Yandex.Cloud
+    name: Deploy on VM
     runs-on: ubuntu-latest
     needs: build_and_push_to_docker_hub
     steps:
