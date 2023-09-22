@@ -83,7 +83,7 @@
 
 >sudo docker-compose exec backend python manage.py createsuperuser
 
-#### Загрузить ингредиенты в базу данных
+#### Загрузить ингредиенты в базу данных.
 >sudo docker-compose exec backend python manage.py load_ingredients ingredients.json
 
 ## Проект доступен по [адресу](https://sergey.zapto.org/)
