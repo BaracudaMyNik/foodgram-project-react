@@ -86,4 +86,4 @@
 #### Загрузить ингредиенты в базу данных.
 >sudo docker-compose exec backend python manage.py load_ingredients ingredients.json
 
-## Проект доступен по [адресу](https://sergey.zapto.org/)
+## Проект доступен по [адресу](https://sergey.zapto.org/) или [по IP](51.250.102.144) 
