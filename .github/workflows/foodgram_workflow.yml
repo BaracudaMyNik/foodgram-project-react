@@ -71,7 +71,7 @@ jobs:
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USER }}
-        key: ${{ secrets.SSH_KEY| base64 -d }}
+        key: ${{ secrets.SSH_KEY | base64 -d }}
         passphrase: ${{ secrets.PASSPHRASE }}
         script: |
           sudo docker-compose stop
