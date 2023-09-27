@@ -1,14 +1,16 @@
-version: "3.7"
+version: '3.8'
+
 services:
+
   db:
     image: postgres:13.0-alpine
     volumes:
-      - /var/lib/postgresql/data/
+      - db_data:/var/lib/postgresql/data/
     env_file:
       - ./.env
 
   backend:
-    image: baracuda1975/foodgram_backend
+    image: baracuda1975/foodgram-backend:latest
     restart: always
     volumes:
       - static_value:/app/static/
@@ -19,26 +21,28 @@ services:
       - ./.env
 
   frontend:
-    image: baracuda1975/foodgram_frontend
+    image: baracuda1975/foodgram-frontend:latest
     volumes:
-      - frontend_value:/app/build/
+      - ../frontend/:/app/result_build/
+    depends_on:
+      - backend
 
   nginx:
     image: nginx:1.21.3-alpine
     ports:
-      - "8080:80"
+      - "80:80"
+      - "443:443"
     volumes:
+      - static_value:/var/html/static
+      - media_value:/var/html/media
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
-      - ./docs/:/usr/share/nginx/html/api/docs/
-      - frontend_value:/usr/share/nginx/html/
-      - static_value:/var/html/static/
-      - media_value:/var/html/media/
+      - ../frontend/build:/usr/share/nginx/html/
+      - ../docs/:/usr/share/nginx/html/api/docs/
+    restart: always
     depends_on:
-      - backend
       - frontend
 
 volumes:
   static_value:
   media_value:
-  frontend_value:
-
+  db_data:
