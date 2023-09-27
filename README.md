@@ -50,7 +50,7 @@ git push
 git clone https://github.com//BaracudaMyNik/foodgram-project-react.git
 cd backend
 ```
-Создайте и активируйте виртуальное окружение, обновите pip:
+Создайте и активируйте виртуальное окружение, обновите pip :
 ```
 python3 -m venv venv
 . venv/bin/activate
