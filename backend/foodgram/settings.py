@@ -61,8 +61,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'foodgram.wsgi.application'
-
+WSGI_APPLICATION = 'backend.wsgi.application'
 if DEBUG:
     DATABASES = {
        'default': {
