@@ -1,3 +1,4 @@
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -130,11 +131,3 @@ dmypy.json
 
 # .idea
 .idea
-
-# staticfiles and mediafiles
-backend/media/
-backend/static/
-backend/staticfiles/
-# data/
-frontend/
-media/
