@@ -1,51 +1,146 @@
-from django.contrib.admin import ModelAdmin, register
+from django.contrib import admin
 
-from recipes.models import (Favorite, Ingredient, Recipe, RecipeIngredient,
-                            ShoppingCart, Tag)
+from backend.settings import LIST_PER_PAGE
+
+from .models import (
+    Favorite,
+    Ingredient,
+    IngredientAmount,
+    Recipe,
+    ShoppingCart,
+    Tag
+)
 
 
-@register(Ingredient)
-class IngredientAdmin(ModelAdmin):
-    list_display = ('name', 'measurement_unit')
+@admin.register(Tag)
+class TagAdmin(admin.ModelAdmin):
+    """Класс настройки раздела тегов."""
+
+    list_display = (
+        'pk',
+        'name',
+        'color',
+        'slug'
+    )
+    empty_value_display = 'значение отсутствует'
+    list_filter = ('name',)
+    list_per_page = LIST_PER_PAGE
+    search_fields = ('name',)
+    prepopulated_fields = {'slug': ('name',)}
+
+
+@admin.register(Ingredient)
+class IngredientAdmin(admin.ModelAdmin):
+    """Класс настройки раздела ингредиентов."""
+
+    list_display = (
+        'pk',
+        'name',
+        'measurement_unit'
+    )
+    empty_value_display = 'значение отсутствует'
+    list_filter = ('name',)
+    list_per_page = LIST_PER_PAGE
     search_fields = ('name',)
 
 
-@register(Tag)
-class TagAdmin(ModelAdmin):
-    list_display = ('name', 'color', 'slug')
+class IngredientAmountInline(admin.TabularInline):
+    """Класс, позволяющий добавлять ингредиенты в рецепты."""
+
+    model = IngredientAmount
+    min_num = 1
 
 
-@register(Recipe)
-class RecipeAdmin(ModelAdmin):
-    list_display = ('name', 'author', 'pub_date', 'display_tags', 'favorite')
-    list_filter = ('name', 'author', 'tags')
-    search_fields = ('name',)
-    readonly_fields = ('favorite',)
-    fields = ('image',
-              ('name', 'author'),
-              'text',
-              ('tags', 'cooking_time'),
-              'favorite')
+@admin.register(Recipe)
+class RecipeAdmin(admin.ModelAdmin):
+    """Класс настройки раздела рецептов."""
 
-    def display_tags(self, obj):
-        return ', '.join([tag.name for tag in obj.tags.all()])
-    display_tags.short_description = 'Теги'
+    list_display = (
+        'pk',
+        'name',
+        'author',
+        'text',
+        'get_tags',
+        'get_ingredients',
+        'cooking_time',
+        'image',
+        'pub_date',
+        'count_favorite',
+    )
+    inlines = [
+        IngredientAmountInline,
+    ]
 
-    def favorite(self, obj):
-        return obj.favorite.count()
-    favorite.short_description = 'Раз в избранном'
+    empty_value_display = 'значение отсутствует'
+    list_editable = ('author',)
+    list_filter = ('author', 'name', 'tags')
+    list_per_page = LIST_PER_PAGE
+    search_fields = ('author', 'name')
+
+    def get_ingredients(self, object):
+        """Получает ингредиент или список ингредиентов рецепта."""
+        return '\n'.join(
+            (ingredient.name for ingredient in object.ingredients.all())
+        )
+
+    get_ingredients.short_description = 'ингредиенты'
+
+    def get_tags(self, object):
+        """Получает тег или список тегов рецепта."""
+        return '\n'.join((tag.name for tag in object.tags.all()))
+
+    get_tags.short_description = 'теги'
+
+    def count_favorite(self, object):
+        """Вычисляет количество добавлений рецепта в избранное."""
+        return object.favoriting.count()
+
+    count_favorite.short_description = 'Количество добавлений в избранное'
 
 
-@register(RecipeIngredient)
-class RecipeIngredientAdmin(ModelAdmin):
-    list_display = ('recipe', 'ingredient', 'amount')
+@admin.register(IngredientAmount)
+class IngredientAmountAdmin(admin.ModelAdmin):
+    """Класс настройки соответствия игредиентов и рецептов."""
+
+    list_display = (
+        'pk',
+        'ingredient',
+        'amount',
+        'recipe'
+    )
+    empty_value_display = 'значение отсутствует'
+    list_per_page = LIST_PER_PAGE
 
 
-@register(Favorite)
-class FavoriteAdmin(ModelAdmin):
-    list_display = ('recipe', 'user')
+@admin.register(Favorite)
+class FavoriteAdmin(admin.ModelAdmin):
+    """Класс настройки раздела избранного."""
+
+    list_display = (
+        'pk',
+        'user',
+        'recipe',
+    )
+
+    empty_value_display = 'значение отсутствует'
+    list_editable = ('user', 'recipe')
+    list_filter = ('user',)
+    search_fields = ('user',)
+    list_per_page = LIST_PER_PAGE
 
 
-@register(ShoppingCart)
-class ShoppingCartAdmin(ModelAdmin):
-    list_display = ('recipe', 'user')
+@admin.register(ShoppingCart)
+class ShoppingCartAdmin(admin.ModelAdmin):
+    """Класс настройки раздела рецептов, которые добавлены в список покупок."""
+
+    list_display = (
+        'pk',
+        'user',
+        'recipe',
+    )
+
+    empty_value_display = 'значение отсутствует'
+    list_editable = ('user', 'recipe')
+    list_filter = ('user',)
+    search_fields = ('user',)
+    list_per_page = LIST_PER_PAGE

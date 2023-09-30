@@ -1,89 +1,222 @@
-# Продуктовый помощник
+# Cервис Foodgram, "Продуктовый помощник"  
 ![workflow status](https://github.com/baracudamynik/foodgram-project-react/actions/workflows/main.yml/badge.svg)
 
-### Технологии:
-[![Python](https://img.shields.io/badge/-Python-464646?style=flat-square&logo=Python)](https://www.python.org/) [![Django](https://img.shields.io/badge/-Django-464646?style=flat-square&logo=Django)](https://www.djangoproject.com/) [![Django REST Framework](https://img.shields.io/badge/-Django%20REST%20Framework-464646?style=flat-square&logo=Django%20REST%20Framework)](https://www.django-rest-framework.org/) [![PostgreSQL](https://img.shields.io/badge/-PostgreSQL-464646?style=flat-square&logo=PostgreSQL)](https://www.postgresql.org/) [![Nginx](https://img.shields.io/badge/-NGINX-464646?style=flat-square&logo=NGINX)](https://nginx.org/ru/) [![gunicorn](https://img.shields.io/badge/-gunicorn-464646?style=flat-square&logo=gunicorn)](https://gunicorn.org/) [![docker](https://img.shields.io/badge/-Docker-464646?style=flat-square&logo=docker)](https://www.docker.com/) [![GitHub%20Actions](https://img.shields.io/badge/-GitHub%20Actions-464646?style=flat-square&logo=GitHub%20actions)](https://github.com/features/actions)
+[![Python](https://img.shields.io/badge/-Python-464646?style=flat-square&logo=Python)](https://www.python.org/)
+[![Django](https://img.shields.io/badge/-Django-464646?style=flat-square&logo=Django)](https://www.djangoproject.com/)
+[![Django REST Framework](https://img.shields.io/badge/-Django%20REST%20Framework-464646?style=flat-square&logo=Django%20REST%20Framework)](https://www.django-rest-framework.org/)
+[![PostgreSQL](https://img.shields.io/badge/-PostgreSQL-464646?style=flat-square&logo=PostgreSQL)](https://www.postgresql.org/)
+[![Nginx](https://img.shields.io/badge/-NGINX-464646?style=flat-square&logo=NGINX)](https://nginx.org/ru/)
+[![gunicorn](https://img.shields.io/badge/-gunicorn-464646?style=flat-square&logo=gunicorn)](https://gunicorn.org/)
+[![docker](https://img.shields.io/badge/-Docker-464646?style=flat-square&logo=docker)](https://www.docker.com/)
+[![GitHub%20Actions](https://img.shields.io/badge/-GitHub%20Actions-464646?style=flat-square&logo=GitHub%20actions)](https://github.com/features/actions)
+[![Yandex.Cloud](https://img.shields.io/badge/-Yandex.Cloud-464646?style=flat-square&logo=Yandex.Cloud)](https://cloud.yandex.ru/)
 
-## Описание проекта:
+## Описание
 
-#### «Продуктовый помощник»: приложение в котором можно публиковать рецепты, добавлять чужие рецепты в избранное и подписываться на публикации других авторов.
-#### Сервис «Список покупок» позволит создавать список продуктов, которые нужно купить для приготовления выбранных блюд, и получить его в формате PDF.
+Онлайн-сервис Foodgram и API для него.Имеется реализация CI/CD проекта.На этом сервисе пользователи могут публиковать рецепты, подписываться на публикации других пользователей, добавлять понравившиеся рецепты в список "Избранное", а перед походом в магазин скачивать сводный список продуктов, необходимых для приготовления одного или нескольких выбранных блюд.
 
-## Запуск проекта на  сервере:
+### Доступный функционал
 
-#### Склонировать репозиторий
-> https://github.com/BaracudaMyNik/foodgram-project-react.git
+- Аутентификация реализована с помощью стандартного модуля DRF - Authtoken.
+- У неаутентифицированных пользователей доступ к API только на уровне чтения.
+- Создание объектов разрешено только аутентифицированным пользователям.На прочий фунционал наложено ограничение в виде административных ролей и авторства.
+- Управление пользователями.
+- Возможность получения подробной информации о себе и ее редактирование.
+- Возможность подписаться на других пользователей и отписаться от них.
+- Получение списка всех тегов и ингредиентов.
+- Получение списка всех рецептов, их добавление.Получение, обновление и удаление конкретного рецепта.
+- Возможность добавить рецепт в избранное.
+- Возможность добавить рецепт в список покупок.
+- Возможность скачать список покупок в PDF формате.
+- Фильтрация по полям.
+
+#### Документация к API доступна по адресу <http://localhost/api/docs/> после локального запуска проекта
+
+#### Технологи
+
+- Python 3.7
+- Django 3.2.15
+- Django Rest Framework 3.12.4
+- Authtoken
+- Docker
+- Docker-compose
+- PostgreSQL
+- Gunicorn
+- Nginx
+- GitHub Actions
+- Выделенный сервер Linux Ubuntu 22.04 с публичным IP
+
+#### Локальный запуск проекта
+
+- Склонировать репозиторий:
+
+```bash
+   git clone <название репозитория>
+```
+
+```bash
+   cd <название репозитория> 
+```
+
+Cоздать и активировать виртуальное окружение:
+
+Команда для установки виртуального окружения на Mac или Linux:
+
+```bash
+   python3 -m venv env
+   source env/bin/activate
+```
+
+Команда для Windows:
+
+```bash
+   python -m venv venv
+   source venv/Scripts/activate
+```
+
+- Перейти в директорию infra:
+
+```bash
+   cd infra
+```
+
+- Создать файл .env по образцу:
+
+```bash
+   cp .env.example .env
+```
+
+- Выполнить команду для доступа к документации:
+
+```bash
+   docker-compose up 
+```
+
+Установить зависимости из файла requirements.txt:
+
+```bash
+   cd ..
+   cd backend
+   pip install -r requirements.txt
+```
+
+```bash
+   python manage.py migrate
+```
+
+Заполнить базу тестовыми данными об ингредиентах:
+
+```bash
+   python manage.py load_ingredients_data
+```
+
+Создать суперпользователя, если необходимо:
+
+```bash
+python manage.py createsuperuser
+```
+
+- Запустить локальный сервер:
+
+```bash
+   python manage.py runserver
+```
+
+#### Установка на удалённом сервере
+
+- Выполнить вход на удаленный сервер
+- Установить docker:
+
+```bash
+   sudo apt install docker.io
+   ```
+
+- Установить docker-compose:
+
+``` bash
+    sudo apt install docker-compose     
+```
+
+или воспользоваться официальной [инструкцией](https://docs.docker.com/compose/install/)
+
+- Находясь локально в директории infra/, скопировать файлы docker-compose.yml и nginx.conf на удаленный сервер:
+
+```bash
+scp docker-compose.yml <username>@<host>:/home/<username>/
+scp nginx.conf <username>@<host>:/home/<username>/
+```
+
+- Для правильной работы workflow необходимо добавить в Secrets данного репозитория на GitHub переменные окружения:
+
+```bash
+Переменные PostgreSQL, ключ проекта Django и их значения по-умолчанию можно взять из файла .env.example, затем установить свои.
+
+DOCKER_USERNAME=<имя пользователя DockerHub>
+DOCKER_PASSWORD=<пароль от DockerHub>
+
+USER=<username для подключения к удаленному серверу>
+HOST=<ip сервера>
+PASSPHRASE=<пароль для сервера, если он установлен>
+SSH_KEY=<ваш приватный SSH-ключ (для получения команда: cat ~/.ssh/id_rsa)>
+
+TELEGRAM_TO=<id вашего Телеграм-аккаунта>
+TELEGRAM_TOKEN=<токен вашего бота>
+```
+
+#### Workflow проекта
+
+- **запускается при выполнении команды git push**
+- **tests:** проверка кода на соответствие PEP8.
+- **build_and_push_to_docker_hub:** сборка и размещение образа проекта на DockerHub.
+- **deploy:** автоматический деплой на боевой сервер и запуск проекта.
+- **send_massage:** отправка уведомления пользователю в Телеграм.
+
+#### После успешного результата работы workflow зайдите на боевой сервер
+
+- Применить миграции:
+
+```bash
+   sudo docker-compose exec backend python manage.py migrate
+```
+
+- Статика:
+
+```bash
+   sudo docker-compose exec backend python manage.py collectstatic --no-input
+```
+
+- Заполнить базу тестовыми данными об ингредиентах:
+
+```bash
+   sudo docker-compose exec backend python manage.py load_ingredients_data
+```
+
+- Создайть суперпользователя:
+
+```bash
+   sudo docker-compose exec backend python manage.py createsuperuser
+```
 
 
-## Подготовка сервера:
 
-#### Обновить индекс пакетов APT
->sudo apt update 
+Проект доступен по адресу: <http://51.250.102.62>
 
-#### Обновите установленные в системе пакеты и установите обновления безопасности
->sudo apt upgrade -y
+Доступ в админку:
 
-#### Установить менеджер пакетов pip, утилиту для создания виртуального окружения venv, систему контроля версий git, чтобы клонировать ваш проект.
->sudo apt install python3-pip python3-venv git -y
+```bash
+   email - 
+   пароль - 
+```
 
-#### Установите на свой сервер Docker
->sudo apt install docker.io
+Пользователь:
 
-#### Установите docker-compose
->sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+```bash
+   email - 
+   пароль - 
+```
 
->sudo chmod +x /usr/local/bin/docker-compose
+#### Полный список запросов API находятся в документации
 
-#### Загрузите файлы docker-compose.yaml и nginx.conf на удалённый сервер.
->scp /mnt/c/<Путь к проекту>/infra/nginx.conf  <login>@<IP>:/home/<Имя>
+#### Автор
 
->scp /mnt/c/<Путь к проекту>/infra/docker-compose.yaml  <login>@<IP>:/home/<Имя>
-
-#### Добавьте в Secrets GitHub переменные окружения:
-
->DB_ENGINE = "django.db.backends.postgresql"
-
->DB_NAME = "имя базы данных"
-
->DB_USER = "пользователь"
-
->DB_PASSWORD = "пароль"
-
->DB_HOST = "db"
-
->DB_PORT = "5432"
-
->DOCKER_PASSWORD=<пароль от DockerHub>
-
->DOCKER_USERNAME=<имя пользователя>
-
->DJANGO_SK=<секретный ключ проекта django>
-
->USER=<username для подключения к серверу>
-
->HOST=<IP сервера>
-
->PASSPHRASE=<пароль для сервера, если он установлен>
-
->SSH_KEY=<ваш SSH ключ (для получения команда: cat ~/.ssh/id_rsa)>(Копировать полностью)
-
-
-## Workflow состоит из трёх шагов:
-##### Тестирование проекта PEP8.
-##### Сборка и публикация образа.
-##### Автоматический деплой на сервер.
-
-#### Собрать контейнеры на удалённом сервере..
->sudo docker-compose up -d --build
-
-#### Выполнить миграции, собрать статику, создать суперпользователя(По необходимости)
->sudo docker-compose exec backend python manage.py migrate
-
->sudo docker-compose exec backend python manage.py collectstatic
-
->sudo docker-compose exec backend python manage.py createsuperuser
-
-#### Загрузить ингредиенты в базу данных.
->sudo docker-compose exec backend python manage.py load_ingredients ingredients.json
-
-## Проект доступен по [адресу](https://sergey.zapto.org/) или [по IP](51.250.102.144) 
+Постнов Сергей - [https://github.com/BaracudaMyNik](https://github.com/BaracudaMyNik)
