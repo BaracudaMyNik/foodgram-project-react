@@ -29,7 +29,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - default.conf
+      - /etc/nginx/sites-enabled/default
       - ../frontend/build:/usr/share/nginx/html/
       - ../docs/:/usr/share/nginx/html/api/docs/
       - static:/var/html/static
