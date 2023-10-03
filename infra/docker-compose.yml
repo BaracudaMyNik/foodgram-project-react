@@ -1,11 +1,19 @@
-version: '3.9'
+version: '3'
+
+volumes:
+  pg_data:
+  static:
+  media:
+
 services:
 
   db:
-    image: postgres:13.0-alpine
+    image: postgres:13.10
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
+      - pg_data:/var/lib/postgresql/data/
     env_file: .env
+    volumes:
+      - pg_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
 
@@ -29,7 +37,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - /etc/nginx/sites-enabled/default
+      -  /nginx:/etc/nginx/conf.d
       - ../frontend/build:/usr/share/nginx/html/
       - ../docs/:/usr/share/nginx/html/api/docs/
       - static:/var/html/static
@@ -39,7 +47,5 @@ services:
       - backend
       - frontend
 
-volumes:
-  postgres_data:
-  static:
-  media:
+
+
