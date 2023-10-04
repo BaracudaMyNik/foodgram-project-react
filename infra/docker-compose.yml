@@ -14,8 +14,8 @@ services:
 
   backend:
     image: baracuda1975/foodgram_backend:latest
-    env_file: .env
     restart: always
+    env_file: .env
     depends_on:
       - db
     volumes:
@@ -26,6 +26,8 @@ services:
     image: baracuda1975/foodgram_frontend:latest
     volumes:
       - ../frontend/:/app/result_build/
+    depends_on:
+      - backend
 
   nginx:
     image: nginx:1.25.2-alpine
