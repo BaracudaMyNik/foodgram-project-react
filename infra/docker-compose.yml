@@ -10,7 +10,7 @@ services:
     image: postgres:alpine
     environment:
       - DB_ENGINE=django.db.backends.postgresql
-      - POSTGRES_DB=postgres
+      - DB_NAME=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - DB_HOST=db
