@@ -142,7 +142,7 @@ class RecipeSerializer(serializers.ModelSerializer):
                 )
             if int(ingredient.get('amount')) > 100:
                 raise serializers.ValidationError(
-                    'Количество ингредиента не может быть больше 100'
+                    ' 100'
                 )
         return ingredients
 

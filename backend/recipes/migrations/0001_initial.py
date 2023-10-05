@@ -42,7 +42,7 @@ class Migration(migrations.Migration):
             name='IngredientAmount',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('amount', models.PositiveSmallIntegerField(validators=[django.core.validators.MinValueValidator(1, message='Количество ингредиента не может быть нулевым'), django.core.validators.MaxValueValidator(100, message='Количество ингредиента не может быть больше ста')], verbose_name='количество')),
+                ('amount', models.PositiveSmallIntegerField(validators=[django.core.validators.MinValueValidator(1, message='Количество ингредиента не может быть нулевым'), django.core.validators.MaxValueValidator(1000, message='Количество ингредиента не может быть больше 1000')], verbose_name='количество')),
             ],
             options={
                 'verbose_name': 'Соответствие ингредиента и рецепта',
