@@ -1,6 +1,6 @@
 [![foodgram_workflow](https://github.com/baracudamynik/foodgram-project-react/actions/workflows/foodgram_workflow.yml/badge.svg)](https://github.com/baracudamynik/foodgram-project-react/actions/workflows/foodgram_workflow.yml)
 
-# Cервис Foodgram, "Продуктовый помощник"  
+# Cервис Foodgram, " Продуктовый помощник "  
 
 [![Python](https://img.shields.io/badge/-Python-464646?style=flat-square&logo=Python)](https://www.python.org/)
 [![Django](https://img.shields.io/badge/-Django-464646?style=flat-square&logo=Django)](https://www.djangoproject.com/)
@@ -14,7 +14,7 @@
 
 ## Описание
 
-Онлайн-сервис Foodgram и API для него. Имеется реализация CI/CD проекта.На этом сервисе пользователи могут публиковать рецепты, подписываться на публикации других пользователей, добавлять понравившиеся рецепты в список "Избранное", а перед походом в магазин скачивать сводный список продуктов, необходимых для приготовления одного или нескольких выбранных блюд.
+Онлайн-сервис Foodgram и API для него.Имеется реализация CI/CD проекта.На этом сервисе пользователи могут публиковать рецепты, подписываться на публикации других пользователей, добавлять понравившиеся рецепты в список "Избранное", а перед походом в магазин скачивать сводный список продуктов, необходимых для приготовления одного или нескольких выбранных блюд.
 
 ### Доступный функционал
 
