@@ -19,7 +19,8 @@ services:
   backend:
     image: baracuda1975/foodgram_backend:latest
     restart: always
-    env_file: .env
+    env_file:
+      - .env
     depends_on:
       - db
     volumes:

@@ -80,9 +80,9 @@ jobs:
             #echo DB_PORT=${{ secrets.DB_PORT }} >> .env
             #echo ALLOWED_HOSTS=${{ secrets.ALLOWED_HOSTS }} >> .env
             sudo docker-compose up -d --build
-            #sudo docker-compose exec -T backend python manage.py collectstatic --no-input
-            #sudo docker-compose exec -T web python manage.py makemigrations auth
-            #sudo docker-compose exec -T backend python manage.py migrate auth
+            sudo docker-compose exec -T backend python manage.py collectstatic --no-input
+            sudo docker-compose exec -T web python manage.py makemigrations auth
+            sudo docker-compose exec -T backend python manage.py migrate auth
             #sudo docker-compose exec -T backend python manage.py migrate --fake-initial --run-syncdb
   send_message_success:
     runs-on: ubuntu-latest

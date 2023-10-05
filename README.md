@@ -1,5 +1,6 @@
+[![foodgram_workflow](https://github.com/baracudamynik/foodgram-project-react/actions/workflows/foodgram_workflow.yml/badge.svg)](https://github.com/baracudamynik/foodgram-project-react/actions/workflows/foodgram_workflow.yml)
+
 # Cервис Foodgram, "Продуктовый помощник"  
-![workflow status](https://github.com/baracudamynik/foodgram-project-react/actions/workflows/main.yml/badge.svg)
 
 [![Python](https://img.shields.io/badge/-Python-464646?style=flat-square&logo=Python)](https://www.python.org/)
 [![Django](https://img.shields.io/badge/-Django-464646?style=flat-square&logo=Django)](https://www.djangoproject.com/)
@@ -204,15 +205,15 @@ TELEGRAM_TOKEN=<токен вашего бота>
 Доступ в админку:
 
 ```bash
-   email - 
-   пароль - 
+   email - toosergey@yandex.ru
+   пароль - qazwsx123
 ```
 
 Пользователь:
 
 ```bash
-   email - 
-   пароль - 
+   email - zxc@zxc.zx
+   пароль - qazwsx456
 ```
 
 #### Полный список запросов API находятся в документации
