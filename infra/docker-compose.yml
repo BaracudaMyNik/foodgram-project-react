@@ -7,16 +7,18 @@ volumes:
 
 services:
   db:
-    image: postgres:13.10
+    image: postgres:alpine
     environment:
       - DB_ENGINE=django.db.backends.postgresql
-      - DB_NAME=postgres
+      - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - DB_HOST=db
       - DB_PORT=5432
+    ports:
+      - "5432:5432"
     volumes:
-    - pg_data:/var/lib/postgresql/data/
+      - pg_data:/var/lib/postgresql/data/
 
   backend:
     image: baracuda1975/foodgram_backend:latest
