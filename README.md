@@ -205,8 +205,8 @@ TELEGRAM_TOKEN=<токен вашего бота>
 Доступ в админку:
 
 ```bash
-   email - admin@admin.zx
-   пароль - qazwsx123
+   email - admin@admin.admin
+   пароль - admin123
 ```
 
 Пользователь:
