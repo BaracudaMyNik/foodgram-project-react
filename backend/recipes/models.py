@@ -46,7 +46,7 @@ class Tag(models.Model):
 
 
 class Ingredient(models.Model):
-    """Класс ингредиентов."""
+    """Ингредиенты."""
 
     name = models.CharField(
         max_length=150,
@@ -68,7 +68,7 @@ class Ingredient(models.Model):
 
 
 class Recipe(models.Model):
-    """Класс рецептов."""
+    """Рецепты."""
 
     ingredients = models.ManyToManyField(
         Ingredient,
@@ -123,8 +123,8 @@ class Recipe(models.Model):
 
 
 class IngredientAmount(models.Model):
-    """Вспомогательный класс, связывающий рецепты и ингредиенты.
-    Доступно указание количества ингредиента."""
+    """Связка рецептов и ингредиентов.
+    Количества ингредиента."""
 
     ingredient = models.ForeignKey(
         Ingredient,
