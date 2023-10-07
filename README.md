@@ -212,8 +212,8 @@ TELEGRAM_TOKEN=<токен вашего бота>
 Пользователь:
 
 ```bash
-   email - zxc@zxc.zx
-   пароль - qazwsx456
+   email - anto@anto.anto
+   пароль - anto123
 ```
 
 #### Полный список запросов API находятся в документации
