@@ -1,89 +1,69 @@
 from django.contrib.auth.models import AbstractUser
-from django.core.validators import RegexValidator
 from django.db import models
-
-from backend.settings import LENGTH_TEXT
 
 
 class User(AbstractUser):
-    """Класс пользователей."""
-
-    email = models.EmailField(
-        max_length=254,
-        verbose_name='email',
-        unique=True,
-        db_index=True
-    )
+    """Модель пользователя."""
     username = models.CharField(
         max_length=150,
-        verbose_name='Имя пользователя',
         unique=True,
-        db_index=True,
-        validators=[RegexValidator(
-            regex=r'^[\w.@+-]+$',
-            message='Имя пользователя содержит недопустимый символ'
-        )]
+        verbose_name='Логин'
+    )
+    email = models.EmailField(
+        max_length=254,
+        unique=True,
+        verbose_name='Email'
     )
     first_name = models.CharField(
         max_length=150,
-        verbose_name='имя'
+        verbose_name='Имя'
     )
     last_name = models.CharField(
         max_length=150,
-        verbose_name='фамилия'
+        verbose_name='Фамилия'
     )
-    password = models.CharField(
-        max_length=150,
-        verbose_name='пароль'
-    )
-    is_admin = models.BooleanField(
-        verbose_name='администратор',
-        default=False
-    )
+    is_subscribed = models.BooleanField('Подписка', default=False)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = (
-        'username',
-        'first_name',
-        'last_name',
-        'password'
-    )
+    REQUIRED_FIELDS = ['username', 'first_name', 'last_name']
 
     class Meta:
+        ordering = ('username',)
         verbose_name = 'Пользователь'
         verbose_name_plural = 'Пользователи'
-        ordering = ('id',)
+        constraints = [
+            models.UniqueConstraint(
+                fields=['username', 'email'],
+                name='unique_username_email'
+            )
+        ]
 
     def __str__(self):
-        return self.username[:LENGTH_TEXT]
+        return self.username
 
 
 class Subscription(models.Model):
-    """Класс для подписки на авторов контента."""
-
-    subscriber = models.ForeignKey(
+    """Модель подписки на пользователя."""
+    user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name='subscriber',
-        verbose_name='подписчик'
+        related_name='subscriber'
     )
-    author = models.ForeignKey(
+    subscribe = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name='author',
-        verbose_name='Автор'
+        related_name='subscribing'
     )
 
     class Meta:
         verbose_name = 'Подписка'
         verbose_name_plural = 'Подписки'
-        ordering = ('id',)
-        constraints = (
+        constraints = [
             models.UniqueConstraint(
-                fields=['author', 'subscriber'],
+                fields=['user', 'subscribe'],
                 name='unique_subscription'
-            ),
-        )
+            )
+        ]
 
     def __str__(self):
-        return f'{self.subscriber} подписан на: {self.author}'
+        return f'{self.user.username} - {self.subscribe.username}'
