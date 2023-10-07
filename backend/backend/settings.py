@@ -11,7 +11,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['51.250.102.62', 'sergey.zapto.org']
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -141,4 +141,4 @@ DJOSER = {
 
 LENGTH_TEXT = 15
 LIST_PER_PAGE = 10
-RECIPES_LIMIT = 2
+RECIPES_LIMIT = 200
