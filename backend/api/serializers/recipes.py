@@ -140,9 +140,9 @@ class RecipeSerializer(serializers.ModelSerializer):
                 raise serializers.ValidationError(
                     'Количество ингредиента не может быть меньше 1'
                 )
-            if int(ingredient.get('amount')) > 100:
+            if int(ingredient.get('amount')) > 1000:
                 raise serializers.ValidationError(
-                    'Количество ингредиента не может быть больше 100'
+                    'Количество ингредиента не может быть больше 1000'
                 )
         return ingredients
 
