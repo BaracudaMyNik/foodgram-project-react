@@ -15,7 +15,6 @@ ALLOWED_HOSTS = ['51.250.102.62']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
-    'django.contrib.sites',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
