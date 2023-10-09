@@ -11,7 +11,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', default='jp7j3d9-tc#&b56b==cvs=%sx^cf#xvimg
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['51.250.102.62']
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -68,12 +68,12 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': os.getenv('DB_ENGINE', 'django.db.backends.postgresql'),
-        'NAME': os.getenv('DB_NAME', 'postgres'),
-        'USER': os.getenv('POSTGRES_USER', 'postgres'),
-        'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'postgres'),
-        'HOST': os.getenv('DB_HOST', 'db'),
-        'PORT': os.getenv('DB_PORT', 5432)
+        'ENGINE': os.getenv('POSTGRES_ENGINE'),
+        'NAME': os.getenv('POSTGRES_NAME'),
+        'USER': os.getenv('POSTGRES_USER'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
+        'HOST': os.getenv('POSTGRES_HOST'),
+        'PORT': os.getenv('POSTGRES_PORT')
     }
 }
 
@@ -141,4 +141,4 @@ DJOSER = {
 
 LENGTH_TEXT = 15
 LIST_PER_PAGE = 10
-RECIPES_LIMIT = 200
+RECIPES_LIMIT = 2
