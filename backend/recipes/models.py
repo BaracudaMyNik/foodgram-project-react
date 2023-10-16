@@ -86,11 +86,11 @@ class Recipe(models.Model):
         upload_to='recipes/',
         verbose_name='изображение'
     )
-    name = models.CharField(  # new
+    name = models.CharField(
         max_length=200,
         verbose_name='Hазвание',
         validators=[RegexValidator(
-            regex=r'^[U+0400–U+04FF]+$',
+            regex=r'^[а-яА-ЯёЁ]',
             message='Не допустимо в начале использовать цифры!'
         )],
         db_index=True
