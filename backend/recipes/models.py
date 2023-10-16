@@ -91,7 +91,8 @@ class Recipe(models.Model):
         verbose_name='Hазвание',
         validators=[RegexValidator(
             regex=r'^[а-яА-ЯЁё-]+\s[а-яА-ЯЁё-]+\s[0-9]',
-            message='Не допустимо в начале названии использовать цифры и латиницу'
+            message='Не допустимо в начале названии использовать '
+                    'цифры и латиницу'
         )],
         db_index=True
     )
