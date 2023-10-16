@@ -86,9 +86,13 @@ class Recipe(models.Model):
         upload_to='recipes/',
         verbose_name='изображение'
     )
-    name = models.CharField(
+    name = models.CharField(  # new
         max_length=200,
         verbose_name='Hазвание',
+        validators=[RegexValidator(
+            regex=r'^[а-яА-Я]',
+            message='Не допустимо в названии использовать символы и латиницу'
+        )],
         db_index=True
     )
     text = models.TextField(verbose_name='описание')
