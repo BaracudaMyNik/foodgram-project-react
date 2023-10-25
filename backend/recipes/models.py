@@ -157,7 +157,7 @@ class IngredientAmount(models.Model):
     class Meta:
         verbose_name = 'Соответствие ингредиента и рецепта'
         verbose_name_plural = 'Таблица соответствия ингредиентов и рецептов'
-        ordering = ('id',)
+        ordering = ('ingredient',)
         constraints = (
             models.UniqueConstraint(
                 fields=['recipe', 'ingredient'],
@@ -188,7 +188,7 @@ class Favorite(models.Model):
     class Meta:
         verbose_name = 'Избранное'
         verbose_name_plural = 'Избранное'
-        ordering = ('id',)
+        ordering = ('user',)
         constraints = (
             models.UniqueConstraint(
                 fields=['user', 'recipe'],
