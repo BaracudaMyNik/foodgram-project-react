@@ -20,7 +20,7 @@ class TagSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Tag
-        fields = ('name', 'color', 'slug')
+        fields = '__all__'
 
 
 class IngredientSerializer(serializers.ModelSerializer):
@@ -28,7 +28,7 @@ class IngredientSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Ingredient
-        fields = ('id', 'writers', 'name')
+        fields = '__all__'
 
 
 class IngredientAmountSerializer(serializers.ModelSerializer):
@@ -219,7 +219,7 @@ class FavoriteSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Favorite
-        fields = ['recipe', 'user']
+        fields = '__all__'
         validators = [
             UniqueTogetherValidator(
                 queryset=Favorite.objects.all(),
@@ -234,11 +234,11 @@ class ShoppingCartSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ShoppingCart
-        fields = ['recipe', 'user']
+        fields = '__all__'
         validators = [
             UniqueTogetherValidator(
                 queryset=ShoppingCart.objects.all(),
                 fields=('user', 'recipe'),
-                message='Вы уже добавили этот рецепт в список покупок'
+                message='Вы уже добавляли это рецепт в список покупок'
             )
         ]
