@@ -4,12 +4,12 @@ services:
   db:
     image: postgres:13.0-alpine
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
+      - pg_data:/var/lib/postgresql/data/
     env_file:
       - ./.env
 
   backend:
-    image: monolith200/foodgram_backend:latest
+    image: baracuda1975/foodgram_backend:latest
     restart: always
     volumes:
       - static:/app/static/
@@ -20,7 +20,7 @@ services:
       - ./.env
 
   frontend:
-    image: monolith200/foodgram_frontend:latest
+    image: baracuda1975/foodgram_frontend:latest
     volumes:
       - ../frontend/:/app/result_build/
 
@@ -40,6 +40,6 @@ services:
       - frontend
 
 volumes:
-  postgres_data:
+  pg_data:
   static:
   media:
