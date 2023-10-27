@@ -6,7 +6,6 @@ from django.core.validators import (
 )
 from django.db import models
 
-import backend.сonstants
 from backend.settings import LENGTH_TEXT
 from users.models import User
 
@@ -15,7 +14,7 @@ class Tag(models.Model):
     """Класс тегов."""
 
     name = models.CharField(
-        max_length=backend.сonstants.MAX_TAG,
+        max_length=50,
         verbose_name='Hазвание',
         unique=True,
         db_index=True
@@ -28,7 +27,7 @@ class Tag(models.Model):
         unique=True
     )
     slug = models.SlugField(
-        max_length=backend.сonstants.MAX_TAG,
+        max_length=50,
         verbose_name='slug',
         unique=True,
         validators=[RegexValidator(
@@ -50,7 +49,7 @@ class Ingredient(models.Model):
     """Ингредиенты."""
 
     name = models.CharField(
-        max_length=backend.сonstants.NAME,
+        max_length=150,
         verbose_name='Hазвание',
         db_index=True
     )
@@ -104,10 +103,6 @@ class Recipe(models.Model):
                 1,
                 message='Время приготовления не может быть меньше 1'
             ),
-            MaxValueValidator(
-                180,
-                message='Время приготовления не может быть больше 180'
-            )
         ],
     )
     author = models.ForeignKey(
@@ -162,7 +157,7 @@ class IngredientAmount(models.Model):
     class Meta:
         verbose_name = 'Соответствие ингредиента и рецепта'
         verbose_name_plural = 'Таблица соответствия ингредиентов и рецептов'
-        ordering = ('ingredient',)
+        ordering = ('id',)
         constraints = (
             models.UniqueConstraint(
                 fields=['recipe', 'ingredient'],
@@ -193,7 +188,7 @@ class Favorite(models.Model):
     class Meta:
         verbose_name = 'Избранное'
         verbose_name_plural = 'Избранное'
-        ordering = ('user',)
+        ordering = ('id',)
         constraints = (
             models.UniqueConstraint(
                 fields=['user', 'recipe'],
