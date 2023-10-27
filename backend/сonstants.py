@@ -1,0 +1,2 @@
+MAX_TAG = 50
+NAME = 150

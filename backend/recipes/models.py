@@ -8,13 +8,14 @@ from django.db import models
 
 from backend.settings import LENGTH_TEXT
 from users.models import User
+import backend.сonstants
 
 
 class Tag(models.Model):
     """Класс тегов."""
 
     name = models.CharField(
-        max_length=50,
+        max_length=backend.сonstants.MAX_TAG,
         verbose_name='Hазвание',
         unique=True,
         db_index=True
@@ -27,7 +28,7 @@ class Tag(models.Model):
         unique=True
     )
     slug = models.SlugField(
-        max_length=50,
+        max_length=backend.сonstants.MAX_TAG,
         verbose_name='slug',
         unique=True,
         validators=[RegexValidator(
@@ -49,7 +50,7 @@ class Ingredient(models.Model):
     """Ингредиенты."""
 
     name = models.CharField(
-        max_length=150,
+        max_length=backend.сonstants.NAME,
         verbose_name='Hазвание',
         db_index=True
     )
@@ -103,6 +104,10 @@ class Recipe(models.Model):
                 1,
                 message='Время приготовления не может быть меньше 1'
             ),
+            MaxValueValidator(
+                180,
+                message='Время приготовления не может быть больше 180'
+            )
         ],
     )
     author = models.ForeignKey(

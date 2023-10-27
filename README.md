@@ -206,7 +206,7 @@ TELEGRAM_TOKEN=<токен вашего бота>
 
 ```bash
    email - admin@admin.admin
-   пароль - ******
+   пароль - adminZx123xZ
 ```
 
 Пользователь-1:
