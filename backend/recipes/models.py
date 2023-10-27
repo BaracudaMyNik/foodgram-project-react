@@ -6,9 +6,9 @@ from django.core.validators import (
 )
 from django.db import models
 
+import backend.сonstants
 from backend.settings import LENGTH_TEXT
 from users.models import User
-import backend.сonstants
 
 
 class Tag(models.Model):
