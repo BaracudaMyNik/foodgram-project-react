@@ -103,10 +103,6 @@ class Recipe(models.Model):
                 1,
                 message='Время приготовления не может быть меньше 1'
             ),
-            MaxValueValidator(
-                250,
-                message='Время приготовления не может быть больше 250'
-            ),
         ],
     )
     author = models.ForeignKey(
@@ -161,7 +157,7 @@ class IngredientAmount(models.Model):
     class Meta:
         verbose_name = 'Соответствие ингредиента и рецепта'
         verbose_name_plural = 'Таблица соответствия ингредиентов и рецептов'
-        ordering = ('Ingredient',)
+        ordering = ('id',)
         constraints = (
             models.UniqueConstraint(
                 fields=['recipe', 'ingredient'],
@@ -192,7 +188,7 @@ class Favorite(models.Model):
     class Meta:
         verbose_name = 'Избранное'
         verbose_name_plural = 'Избранное'
-        ordering = ('user',)
+        ordering = ('id',)
         constraints = (
             models.UniqueConstraint(
                 fields=['user', 'recipe'],
