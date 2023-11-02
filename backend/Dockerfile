@@ -2,7 +2,7 @@ FROM python:3.7-slim
 
 WORKDIR /app
 
-RUN pip install gunicorn==20.1.0
+pip install gunicorn==20.1.0
 
 COPY requirements.txt /app
 
