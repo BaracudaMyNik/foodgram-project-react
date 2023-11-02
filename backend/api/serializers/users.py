@@ -89,7 +89,7 @@ class SubscriptionSerializer(serializers.ModelSerializer):
         """Проверяем, что пользователь не подписывается на самого себя."""
         if data['subscriber'] == data['author']:
             raise serializers.ValidationError(
-                'Подписка на себя не имеет смысла'
+                'Подписка на cамого себя не имеет смысла'
             )
         return data
 

@@ -38,7 +38,7 @@ class TagViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class IngredientViewSet(viewsets.ReadOnlyModelViewSet):
-    """Вьюсет для создания обектов класса Ingredient."""
+    """Вьюсет для создания обьектов класса Ingredient."""
 
     queryset = Ingredient.objects.all()
     serializer_class = IngredientSerializer
@@ -136,7 +136,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
 
     def get_serializer_class(self):
         """Определяет какой сериализатор будет использоваться
-        для разных типов запросов."""
+        для разных типов запроса."""
         if self.request.method == 'GET':
             return RecipeGETSerializer
         return RecipeSerializer
