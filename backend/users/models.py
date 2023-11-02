@@ -21,7 +21,7 @@ class User(AbstractUser):
         db_index=True,
         validators=[RegexValidator(
             regex=r'^[\w.@+-]+$',
-            message='Имя пользователя содержит недопустимый символ'
+            message='Имя пользователя содержит недопустимый символ.'
         )]
     )
     first_name = models.CharField(

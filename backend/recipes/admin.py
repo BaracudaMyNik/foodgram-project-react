@@ -131,7 +131,8 @@ class FavoriteAdmin(admin.ModelAdmin):
 
 @admin.register(ShoppingCart)
 class ShoppingCartAdmin(admin.ModelAdmin):
-    """Класс настройки раздела рецептов, которые добавлены в список покупок."""
+    """Класс настройки раздела рецептов,
+    которые добавлены в список покупок."""
 
     list_display = (
         'pk',

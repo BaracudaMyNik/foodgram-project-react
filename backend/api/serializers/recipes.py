@@ -16,7 +16,7 @@ from .users import CustomUserSerializer
 
 
 class TagSerializer(serializers.ModelSerializer):
-    """Сериализатор для модели Tag."""
+    """Сериализатор для модели TAG."""
 
     class Meta:
         model = Tag

@@ -31,7 +31,7 @@ class CustomUserViewSet(UserViewSet):
     )
     def get_me(self, request):
         """Позволяет пользователю получить подробную информацию о себе
-        и редактировать её."""
+        и редактировать её"""
         if request.method == 'PATCH':
             serializer = CustomUserSerializer(
                 request.user, data=request.data,
