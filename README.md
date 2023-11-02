@@ -198,15 +198,13 @@ TELEGRAM_TOKEN=<токен вашего бота>
    sudo docker-compose exec backend python manage.py createsuperuser
 ```
 
-
-
 Проект доступен по адресу: <http://51.250.30.87>
 
 Доступ в админку:
 
 ```bash
    email - name@server.zone
-   пароль - ******
+   пароль - *****
 ```
 
 #### Полный список запросов API находятся в документации
