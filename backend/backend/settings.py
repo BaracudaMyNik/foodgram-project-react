@@ -29,7 +29,7 @@ INSTALLED_APPS = [
     'django_filters',
     'colorfield',
     'debug_toolbar',
-    'django-colorfield'
+    'django-colorfield',
 ]
 
 MIDDLEWARE = [
