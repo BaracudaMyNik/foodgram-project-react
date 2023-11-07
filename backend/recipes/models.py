@@ -7,7 +7,6 @@ from django.core.validators import (
 )
 from django.db import models
 
-
 from users.models import User
 
 
