@@ -6,7 +6,6 @@ from django.core.validators import (
 )
 from django.db import models
 
-import backend.сonstants
 from backend.settings import LENGTH_TEXT
 from users.models import User
 
@@ -50,7 +49,7 @@ class Ingredient(models.Model):
     """Ингредиенты."""
 
     name = models.CharField(
-        max_length=backend.сonstants.MAX_LENGHT,
+        max_length=150,
         verbose_name='Hазвание',
         db_index=True
     )
@@ -88,7 +87,7 @@ class Recipe(models.Model):
         verbose_name='изображение'
     )
     name = models.CharField(
-        max_length=backend.сonstants.RECIPE_NAME_MAX_LENGHT,
+        max_length=200,
         verbose_name='Hазвание',
         validators=[RegexValidator(
             regex=r'^[а-яА-ЯёЁ]',
@@ -102,11 +101,11 @@ class Recipe(models.Model):
         validators=[
             MinValueValidator(
                 1,
-                message='Время приготовления не может быть меньше 1 мин'
+                message='Время приготовления не может быть меньше 1'
             ),
             MaxValueValidator(
                 300,
-                message='Время приготовления не может быть, больше 300 мин'
+                message='Время приготовления не может быть меньше 1'
             ),
         ],
     )
