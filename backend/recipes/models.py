@@ -9,12 +9,14 @@ from django.db import models
 from backend.settings import LENGTH_TEXT
 from users.models import User
 
+import backend.сonstants
+
 
 class Tag(models.Model):
     """Класс тегов."""
 
     name = models.CharField(
-        max_length=50,
+        max_length=backend.сonstants.MAX_NAME_LENGHT,
         verbose_name='Hазвание',
         unique=True,
         db_index=True
