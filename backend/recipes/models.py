@@ -6,6 +6,7 @@ from django.core.validators import (
 )
 from django.db import models
 
+import backend.сonstants
 from backend.settings import LENGTH_TEXT
 from users.models import User
 
@@ -14,7 +15,7 @@ class Tag(models.Model):
     """Класс тегов."""
 
     name = models.CharField(
-        max_length=50,
+        max_length=backend.сonstants.TAG_MAX_LENGHT,
         verbose_name='Hазвание',
         unique=True,
         db_index=True
@@ -22,12 +23,12 @@ class Tag(models.Model):
 
     color = ColorField(
         default='#FF0000',
-        max_length=7,
+        max_length=backend.сonstants.TAG_COLOR_MAX_LENGHT,
         verbose_name='цвет',
         unique=True
     )
     slug = models.SlugField(
-        max_length=50,
+        max_length=backend.сonstants.TAG_MAX_LENGHT,
         verbose_name='slug',
         unique=True,
         validators=[RegexValidator(
@@ -49,7 +50,7 @@ class Ingredient(models.Model):
     """Ингредиенты."""
 
     name = models.CharField(
-        max_length=150,
+        max_length=backend.сonstants.MAX_LENGHT,
         verbose_name='Hазвание',
         db_index=True
     )
@@ -87,7 +88,7 @@ class Recipe(models.Model):
         verbose_name='изображение'
     )
     name = models.CharField(
-        max_length=200,
+        max_length=backend.сonstants.RECIPE_NAME_MAX_LENGHT,
         verbose_name='Hазвание',
         validators=[RegexValidator(
             regex=r'^[а-яА-ЯёЁ]',
@@ -100,8 +101,12 @@ class Recipe(models.Model):
         verbose_name='время приготовления (в минутах)',
         validators=[
             MinValueValidator(
-                1,
+                backend.сonstants.MIN_VALUE_VALIDATOR,
                 message='Время приготовления не может быть меньше 1'
+            ),
+            MaxValueValidator(
+                backend.сonstants.COOKING_MAX_VALUE_VALIDATOR,
+                message='Время приготовления не может быть, больше 600'
             ),
         ],
     )
@@ -144,11 +149,11 @@ class IngredientAmount(models.Model):
         verbose_name='количество',
         validators=[
             MinValueValidator(
-                1,
+                backend.сonstants.MIN_VALUE_VALIDATOR,
                 message='Количество ингредиента не может быть нулевым'
             ),
             MaxValueValidator(
-                1000,
+                backend.сonstants.MAX_VALUE_VALIDATOR,
                 message='Количество ингредиента не может быть больше тысячи'
             )
         ],
