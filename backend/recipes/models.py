@@ -7,7 +7,7 @@ from django.core.validators import (
 )
 from django.db import models
 
-from backend.settings import LENGTH_TEXT
+# from backend.settings import LENGTH_TEXT
 from users.models import User
 
 
@@ -24,7 +24,7 @@ class Tag(models.Model):
     color = ColorField(
         format='hexa',
         default='#FF0000',
-        max_length=7,
+        max_length=settings.TAG_COLOR_MAX_LENGHT,
         verbose_name='цвет',
         unique=True
     )
@@ -44,7 +44,7 @@ class Tag(models.Model):
         ordering = ('name',)
 
     def __str__(self):
-        return self.slug[:LENGTH_TEXT]
+        return self.slug[:settings.LENGTH_TEXT]
 
 
 class Ingredient(models.Model):
@@ -66,7 +66,7 @@ class Ingredient(models.Model):
         ordering = ('name',)
 
     def __str__(self):
-        return self.name[:LENGTH_TEXT]
+        return self.name[:settings.LENGTH_TEXT]
 
 
 class Recipe(models.Model):
@@ -131,7 +131,7 @@ class Recipe(models.Model):
         ordering = ('-pub_date',)
 
     def __str__(self):
-        return self.name[:LENGTH_TEXT]
+        return self.name[:settings.LENGTH_TEXT]
 
 
 class IngredientAmount(models.Model):
