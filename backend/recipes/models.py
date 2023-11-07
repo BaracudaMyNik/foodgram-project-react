@@ -1,5 +1,4 @@
 from colorfield.fields import ColorField
-from django.conf import settings
 from django.core.validators import (
     MaxValueValidator,
     MinValueValidator,
@@ -7,6 +6,7 @@ from django.core.validators import (
 )
 from django.db import models
 
+from backend.settings import LENGTH_TEXT
 from users.models import User
 
 
@@ -14,20 +14,20 @@ class Tag(models.Model):
     """Класс тегов."""
 
     name = models.CharField(
-        max_length=settings.MAX_NAME_LENGHT,
+        max_length=50,
         verbose_name='Hазвание',
         unique=True,
         db_index=True
     )
 
     color = ColorField(
-        default='#03fc24',
-        max_length=settings.TAG_COLOR_MAX_LENGHT,
+        default='#FF0000',
+        max_length=7,
         verbose_name='цвет',
         unique=True
     )
     slug = models.SlugField(
-        max_length=settings.MAX_NAME_LENGHT,
+        max_length=50,
         verbose_name='slug',
         unique=True,
         validators=[RegexValidator(
@@ -42,14 +42,14 @@ class Tag(models.Model):
         ordering = ('name',)
 
     def __str__(self):
-        return self.slug[:settings.LENGTH_TEXT]
+        return self.slug[:LENGTH_TEXT]
 
 
 class Ingredient(models.Model):
     """Ингредиенты."""
 
     name = models.CharField(
-        max_length=settings.MAX_NAME_LENGHT,
+        max_length=150,
         verbose_name='Hазвание',
         db_index=True
     )
@@ -64,7 +64,7 @@ class Ingredient(models.Model):
         ordering = ('name',)
 
     def __str__(self):
-        return self.name[:settings.LENGTH_TEXT]
+        return self.name[:LENGTH_TEXT]
 
 
 class Recipe(models.Model):
@@ -87,7 +87,7 @@ class Recipe(models.Model):
         verbose_name='изображение'
     )
     name = models.CharField(
-        max_length=settings.RECIPE_NAME_MAX_LENGHT,
+        max_length=200,
         verbose_name='Hазвание',
         validators=[RegexValidator(
             regex=r'^[а-яА-ЯёЁ]',
@@ -100,14 +100,8 @@ class Recipe(models.Model):
         verbose_name='время приготовления (в минутах)',
         validators=[
             MinValueValidator(
-                settings.MIN_VALUE_VALIDATOR,
-                message=f'Время приготовления не может быть меньше '
-                        f'{settings.MIN_VALUE_VALIDATOR}'
-            ),
-            MaxValueValidator(
-                settings.MAX_VALUE_VALIDATOR,
-                message=f'Время приготовления не может быть, '
-                        f'больше {settings.MAX_VALUE_VALIDATOR}'
+                1,
+                message='Время приготовления не может быть меньше 1'
             ),
         ],
     )
@@ -129,7 +123,7 @@ class Recipe(models.Model):
         ordering = ('-pub_date',)
 
     def __str__(self):
-        return self.name[:settings.LENGTH_TEXT]
+        return self.name[:LENGTH_TEXT]
 
 
 class IngredientAmount(models.Model):
@@ -150,13 +144,12 @@ class IngredientAmount(models.Model):
         verbose_name='количество',
         validators=[
             MinValueValidator(
-                settings.MIN_VALUE_VALIDATOR,
+                1,
                 message='Количество ингредиента не может быть нулевым'
             ),
             MaxValueValidator(
-                settings.MAX_VALUE_VALIDATOR,
-                message=f'Количество ингредиента не может быть '
-                        f'больше {settings.MAX_VALUE_VALIDATOR}'
+                1000,
+                message='Количество ингредиента не может быть больше тысячи'
             )
         ],
     )
