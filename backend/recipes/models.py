@@ -101,7 +101,11 @@ class Recipe(models.Model):
         validators=[
             MinValueValidator(
                 1,
-                message='Время приготовления не может быть меньше 1'
+                message='Время приготовления не может быть меньше 1 мин'
+            ),
+            MaxValueValidator(
+                300,
+                message='Время приготовления не может быть, больше 300 мин'
             ),
         ],
     )
