@@ -2,9 +2,9 @@ version: '3.3'
 
 services:
   db:
-    image: postgres:alpine
+    image: postgres:14-alpine
     env_file:
-      - .env
+      - ./:.env
     ports:
       - "5432:5432"
     volumes:
@@ -12,7 +12,6 @@ services:
 
   backend:
     image: baracuda1975/foodgram_backend:latest
-    restart: always
     env_file:
       - .env
     depends_on:
