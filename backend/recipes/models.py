@@ -6,7 +6,6 @@ from django.core.validators import (
 )
 from django.db import models
 
-import backend.сonstants
 from backend.settings import LENGTH_TEXT
 from users.models import User
 
@@ -15,7 +14,7 @@ class Tag(models.Model):
     """Класс тегов."""
 
     name = models.CharField(
-        max_length=backend.сonstants.MAX_NAME_LENGHT,
+        max_length=50,
         verbose_name='Hазвание',
         unique=True,
         db_index=True
