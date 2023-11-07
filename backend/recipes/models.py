@@ -6,9 +6,10 @@ from django.core.validators import (
 )
 from django.db import models
 
-import backend.сonstants
 from backend.settings import LENGTH_TEXT
 from users.models import User
+
+import backend.сonstants
 
 
 class Tag(models.Model):
@@ -101,13 +102,12 @@ class Recipe(models.Model):
         verbose_name='время приготовления (в минутах)',
         validators=[
             MinValueValidator(
-                backend.сonstants.MIN_VALUE_VALIDATOR,
+                1,
                 message='Время приготовления не может быть меньше 1 мин'
             ),
             MaxValueValidator(
-                backend.сonstants.COOKING_MAX_VALUE_VALIDATOR,
-                message=f'Время приготовления не может быть, больше '
-                        f'{backend.сonstants.COOKING_MAX_VALUE_VALIDATOR} мин'
+                300,
+                message='Время приготовления не может быть, больше 300 мин'
             ),
         ],
     )
@@ -150,13 +150,12 @@ class IngredientAmount(models.Model):
         verbose_name='количество',
         validators=[
             MinValueValidator(
-                backend.сonstants.MIN_VALUE_VALIDATOR,
+                1,
                 message='Количество ингредиента не может быть нулевым'
             ),
             MaxValueValidator(
-                backend.сonstants.MAX_VALUE_VALIDATOR,
-                message=f'Количество ингредиента не может быть больше '
-                        f'{backend.сonstants.MAX_VALUE_VALIDATOR}'
+                1000,
+                message='Количество ингредиента не может быть больше тысячи'
             )
         ],
     )
