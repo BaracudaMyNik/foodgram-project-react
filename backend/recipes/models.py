@@ -103,10 +103,6 @@ class Recipe(models.Model):
                 1,
                 message='Время приготовления не может быть меньше 1'
             ),
-            MaxValueValidator(
-                300,
-                message='Время приготовления не может быть меньше 1'
-            ),
         ],
     )
     author = models.ForeignKey(
