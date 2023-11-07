@@ -9,6 +9,8 @@ from django.db import models
 from backend.settings import LENGTH_TEXT
 from users.models import User
 
+import backend.сonstants
+
 
 class Tag(models.Model):
     """Класс тегов."""
@@ -49,7 +51,7 @@ class Ingredient(models.Model):
     """Ингредиенты."""
 
     name = models.CharField(
-        max_length=150,
+        max_length=backend.сonstants.MAX_LENGHT,
         verbose_name='Hазвание',
         db_index=True
     )
@@ -87,7 +89,7 @@ class Recipe(models.Model):
         verbose_name='изображение'
     )
     name = models.CharField(
-        max_length=200,
+        max_length=backend.сonstants.RECIPE_NAME_MAX_LENGHT,
         verbose_name='Hазвание',
         validators=[RegexValidator(
             regex=r'^[а-яА-ЯёЁ]',
@@ -100,12 +102,13 @@ class Recipe(models.Model):
         verbose_name='время приготовления (в минутах)',
         validators=[
             MinValueValidator(
-                1,
+                backend.сonstants.MIN_VALUE_VALIDATOR,
                 message='Время приготовления не может быть меньше 1 мин'
             ),
             MaxValueValidator(
-                300,
-                message='Время приготовления не может быть, больше 300 мин'
+                backend.сonstants.COOKING_MAX_VALUE_VALIDATOR,
+                message=f'Время приготовления не может быть, больше '
+                        f'{backend.сonstants.COOKING_MAX_VALUE_VALIDATOR} мин'
             ),
         ],
     )
@@ -148,12 +151,13 @@ class IngredientAmount(models.Model):
         verbose_name='количество',
         validators=[
             MinValueValidator(
-                1,
+                backend.сonstants.MIN_VALUE_VALIDATOR,
                 message='Количество ингредиента не может быть нулевым'
             ),
             MaxValueValidator(
-                1000,
-                message='Количество ингредиента не может быть больше тысячи'
+                backend.сonstants.MAX_VALUE_VALIDATOR,
+                message=f'Количество ингредиента не может быть больше '
+                        f'{backend.сonstants.MAX_VALUE_VALIDATOR}'
             )
         ],
     )
