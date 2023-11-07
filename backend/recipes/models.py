@@ -21,7 +21,6 @@ class Tag(models.Model):
     )
 
     color = ColorField(
-        format='hexa',
         default='#FF0000',
         max_length=settings.TAG_COLOR_MAX_LENGHT,
         verbose_name='цвет',
