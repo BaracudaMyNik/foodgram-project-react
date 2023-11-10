@@ -6,7 +6,14 @@ from django.core.validators import (
 )
 from django.db import models
 
-from backend.settings import LENGTH_TEXT
+from backend.settings import (
+    INGRED_MAX_LENGHT,
+    LENGTH_TEXT,
+    RECIPE_NAME_MAX_LENGHT,
+    TAG_COLOR_LENGHT,
+    TAG_NAME_LENGHT,
+    TAG_SLUG_LENGHT
+)
 from users.models import User
 
 
@@ -14,7 +21,7 @@ class Tag(models.Model):
     """Класс тегов."""
 
     name = models.CharField(
-        max_length=50,
+        max_length=TAG_NAME_LENGHT,
         verbose_name='Hазвание',
         unique=True,
         db_index=True
@@ -22,12 +29,12 @@ class Tag(models.Model):
 
     color = ColorField(
         default='#FF0000',
-        max_length=7,
+        max_length=TAG_COLOR_LENGHT,
         verbose_name='цвет',
         unique=True
     )
     slug = models.SlugField(
-        max_length=50,
+        max_length=TAG_SLUG_LENGHT,
         verbose_name='slug',
         unique=True,
         validators=[RegexValidator(
@@ -49,12 +56,12 @@ class Ingredient(models.Model):
     """Ингредиенты."""
 
     name = models.CharField(
-        max_length=150,
+        max_length=INGRED_MAX_LENGHT,
         verbose_name='Hазвание',
         db_index=True
     )
     measurement_unit = models.CharField(
-        max_length=10,
+        max_length=INGRED_MAX_LENGHT,
         verbose_name='единица измерения'
     )
 
@@ -87,7 +94,7 @@ class Recipe(models.Model):
         verbose_name='изображение'
     )
     name = models.CharField(
-        max_length=200,
+        max_length=RECIPE_NAME_MAX_LENGHT,
         verbose_name='Hазвание',
         validators=[RegexValidator(
             regex=r'^[а-яА-ЯёЁ]',

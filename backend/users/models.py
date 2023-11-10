@@ -2,7 +2,7 @@ from django.contrib.auth.models import AbstractUser
 from django.core.validators import RegexValidator
 from django.db import models
 
-from backend.settings import EMAIL_MAX_LENGHT, LENGTH_TEXT
+from backend.settings import EMAIL_MAX_LENGHT, LENGTH_TEXT, MAX_NAME_LENGHT
 
 
 class User(AbstractUser):
@@ -15,7 +15,7 @@ class User(AbstractUser):
         db_index=True
     )
     username = models.CharField(
-        max_length=150,
+        max_length=MAX_NAME_LENGHT,
         verbose_name='Имя пользователя',
         unique=True,
         db_index=True,
@@ -25,15 +25,15 @@ class User(AbstractUser):
         )]
     )
     first_name = models.CharField(
-        max_length=150,
+        max_length=MAX_NAME_LENGHT,
         verbose_name='имя'
     )
     last_name = models.CharField(
-        max_length=150,
+        max_length=MAX_NAME_LENGHT,
         verbose_name='фамилия'
     )
     password = models.CharField(
-        max_length=150,
+        max_length=MAX_NAME_LENGHT,
         verbose_name='пароль'
     )
     is_admin = models.BooleanField(
