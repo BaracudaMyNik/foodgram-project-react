@@ -1,4 +1,4 @@
-import Constants
+# import Constants
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import RegexValidator
 from django.db import models
@@ -10,7 +10,7 @@ class User(AbstractUser):
     """Класс пользователей."""
 
     email = models.EmailField(
-        max_length=Constants.EMAIL_MAX_LENGHT,
+        max_length=254, # Constants.EMAIL_MAX_LENGHT,
         verbose_name='email',
         unique=True,
         db_index=True
