@@ -1,8 +1,8 @@
-import backend.Сonstants
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import RegexValidator
 from django.db import models
 
+import backend.Сonstants
 from backend.settings import LENGTH_TEXT
 
 
