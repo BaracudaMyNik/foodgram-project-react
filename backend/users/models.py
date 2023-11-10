@@ -2,7 +2,7 @@ from django.contrib.auth.models import AbstractUser
 from django.core.validators import RegexValidator
 from django.db import models
 
-import backend.Сonstants
+# import backend.Сonstants
 from backend.settings import LENGTH_TEXT
 
 
@@ -10,7 +10,7 @@ class User(AbstractUser):
     """Класс пользователей."""
 
     email = models.EmailField(
-        max_length=backend.Сonstants.EMAIL_MAX_LENGHT,
+        max_length=254,
         verbose_name='email',
         unique=True,
         db_index=True
