@@ -53,7 +53,7 @@ class CustomUserViewSet(UserViewSet):
         permission_classes=(permissions.IsAuthenticated,)
     )
     def get_subscribe(self, request, id):
-        """Позволяет текущему пользователю подписываться/отписываться от
+        """Позволяет текущему пользователю подписываться/отписываться
         от автора контента, чей профиль он просматривает."""
         author = get_object_or_404(User, id=id)
         if request.method == 'POST':
