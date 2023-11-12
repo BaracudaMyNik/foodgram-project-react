@@ -219,7 +219,7 @@ class FavoriteSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Favorite
-        fields = '__all__'
+        fields = ('id', 'recipe', 'user')
         validators = [
             UniqueTogetherValidator(
                 queryset=Favorite.objects.all(),
@@ -234,7 +234,7 @@ class ShoppingCartSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ShoppingCart
-        fields = '__all__'
+        fields = ('id', 'recipe', 'user')
         validators = [
             UniqueTogetherValidator(
                 queryset=ShoppingCart.objects.all(),
