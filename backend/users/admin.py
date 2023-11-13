@@ -59,4 +59,3 @@ admin.site.site_title = 'Администрирование Foodgram'
 admin.site.site_header = 'Администрирование Foodgram'
 admin.site.unregister(Group)
 admin.site.unregister(TokenProxy)
-
