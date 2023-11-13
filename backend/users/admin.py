@@ -16,7 +16,9 @@ class UserAdmin(admin.ModelAdmin):
         'first_name',
         'last_name',
         'password',
-        'is_admin'
+        'is_admin',
+        'recipes_count',
+        'follows_count'
     )
     # выводим кол-во рецептов и подписчиков в листе пользователей
 
