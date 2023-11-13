@@ -168,7 +168,7 @@ class IngredientAmount(models.Model):
     class Meta:
         verbose_name = 'Соответствие ингредиента и рецепта'
         verbose_name_plural = 'Таблица соответствия ингредиентов и рецептов'
-        ordering = ('id',)
+        ordering = ('recipe',)
         constraints = (
             models.UniqueConstraint(
                 fields=['recipe', 'ingredient'],
