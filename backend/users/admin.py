@@ -1,5 +1,6 @@
 from django.contrib import admin
-
+from gjango.contrib.auth.models import Group
+from rest_framework.authtoken.models import TokenProxy
 from backend.settings import LIST_PER_PAGE
 
 from .models import Subscription, User
@@ -55,3 +56,6 @@ class SubscriptionAdmin(admin.ModelAdmin):
 
 admin.site.site_title = 'Администрирование Foodgram'
 admin.site.site_header = 'Администрирование Foodgram'
+admin.site.unregister(Group)
+admin.site.unregister(TokenProxy)
+
