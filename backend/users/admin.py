@@ -18,6 +18,16 @@ class UserAdmin(admin.ModelAdmin):
         'password',
         'is_admin'
     )
+    # выводим кол-во рецептов и подписчиков в листе пользователей
+
+    @admin.display(description='Количество рецептов у пользователя')
+    def recipes_count(self, obj):
+        return obj.recipes.count()
+
+    @admin.display(description='Количество подписчиков у пользователя')
+    def follows_count(self, obj):
+        return obj.recipes.count()
+
     empty_value_display = 'значение отсутствует'
     list_editable = ('is_admin',)
     list_filter = ('username', 'email')
