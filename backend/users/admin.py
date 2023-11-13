@@ -8,8 +8,6 @@ from .models import Subscription, User
 # from rest_framework.authtoken.models import TokenProxy
 
 
-
-
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
     """Класс настройки раздела пользователей."""
