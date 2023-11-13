@@ -1,11 +1,10 @@
 from django.contrib import admin
+from django.contrib.auth.models import Group
+from rest_framework.authtoken.models import TokenProxy
 
 from backend.settings import LIST_PER_PAGE
 
 from .models import Subscription, User
-
-from gjango.contrib.auth.models import Group
-from rest_framework.authtoken.models import TokenProxy
 
 
 @admin.register(User)
