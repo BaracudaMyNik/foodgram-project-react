@@ -205,15 +205,13 @@ class Favorite(UserRecipeModel):
         verbose_name = 'Избранное'
         verbose_name_plural = 'Избранное'
         ordering = ('user',)
-        constraints = (
+        constraints = [
             models.UniqueConstraint(
-                fields=['user', 'recipe'],
-                name='unique_favorite_recipe'
-            ),
-        )
+                fields=['user', 'recipe'], name='unique_favorite_recipe'),
+        ]
 
     def __str__(self):
-        return f'{self.recipe} в избранном у {self.user}'
+        return f'{self.recipe.name} в избранном у {self.user.username}'
 
 
 class ShoppingCart(UserRecipeModel):
@@ -231,6 +229,6 @@ class ShoppingCart(UserRecipeModel):
         )
 
     def __str__(self):
-        return f'{self.recipe} в списке покупок у {self.user}'
+        return f'{self.recipe.name} в списке покупок у {self.user.username}'
 
     # ------------------   конец    ---------------------
