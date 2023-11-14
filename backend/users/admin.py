@@ -27,6 +27,18 @@ class UserAdmin(admin.ModelAdmin):
     list_per_page = LIST_PER_PAGE
     search_fields = ('username',)
 
+    def count_followers(self, object):
+        """Вычисляет количество подписок."""
+        return object.subscriber.count()
+
+    count_followers.short_description = 'Количество подписчиков'
+
+    def count_recipes(self, object):
+        """Вычисляет количество рецептов."""
+        return object.recipes.count()
+
+    count_followers.short_description = 'Количество рецептов'
+
 
 @admin.register(Subscription)
 class SubscriptionAdmin(admin.ModelAdmin):

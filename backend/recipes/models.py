@@ -187,7 +187,6 @@ class IngredientAmount(models.Model):
         return f'{self.recipe} содержит ингредиент/ты {self.ingredient}'
 
 
-# ------------------   начало    ---------------------
 class UserRecipeModel(models.Model):
     """Абстрактная модель"""
     user = models.ForeignKey(
@@ -230,4 +229,3 @@ class ShoppingCart(UserRecipeModel):
 
     def __str__(self):
         return f'{self.recipe.name} в списке покупок у {self.user.username}'
-    # ------------------   конец    ---------------------
