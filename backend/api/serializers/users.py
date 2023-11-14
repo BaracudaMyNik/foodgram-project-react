@@ -25,9 +25,9 @@ class CustomUserCreateSerializer(UserCreateSerializer):
     def validate(self, data):
         """Запрещает пользователям присваивать себе username me
         и использовать повторные username и email."""
-        if data.get('username') == 'me' or 'Me':
+        if data.get('username') == 'me' or data.get('username') == 'Me':
             raise serializers.ValidationError(
-                'Использовать имя me запрещено'
+                'Использовать имя Me или me запрещено!'
             )
         if User.objects.filter(username=data.get('username')):
             raise serializers.ValidationError(
@@ -58,9 +58,9 @@ class CustomUserSerializer(UserSerializer):
 
     def validate(self, data):
         """Запрещает пользователям изменять себе username на me."""
-        if data.get('username') == 'me' or 'Me':
+        if data.get('username') == 'me' or data.get('username') == 'Me':
             raise serializers.ValidationError(
-                'Использовать имя me запрещено'
+                'Использовать имя Me или me запрещено!'
             )
 
     def get_is_subscribed(self, object):
