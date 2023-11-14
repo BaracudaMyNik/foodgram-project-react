@@ -2,7 +2,7 @@ from django.contrib.auth.models import AbstractUser
 from django.core.validators import RegexValidator
 from django.db import models
 
-from backend.settings import EMAIL_MAX_LENGHT, LENGTH_TEXT, MAX_NAME_LENGHT
+from backend.settings import EMAIL_MAX_LENGHT, LENGTH_TEXT, MAX_NAME_LENGHT, MAX_USERS
 
 
 class User(AbstractUser):
@@ -91,3 +91,4 @@ class Subscription(models.Model):
 
     def __str__(self):
         return f'{self.subscriber} подписан на: {self.author}'
+

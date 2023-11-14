@@ -25,7 +25,7 @@ class CustomUserCreateSerializer(UserCreateSerializer):
     def validate(self, data):
         """Запрещает пользователям присваивать себе username me
         и использовать повторные username и email."""
-        if data.get('username') == 'me':
+        if data.get('username') == 'me' or 'Me':
             raise serializers.ValidationError(
                 'Использовать имя me запрещено'
             )
@@ -112,6 +112,7 @@ class SubscriptionShowSerializer(CustomUserSerializer):
 
     recipes = serializers.SerializerMethodField()
     recipes_count = serializers.SerializerMethodField()
+    follow_count = serializers.SerializerMethodField()
 
     class Meta:
         model = User
@@ -123,7 +124,7 @@ class SubscriptionShowSerializer(CustomUserSerializer):
             'last_name',
             'is_subscribed',
             'recipes',
-            'recipes_count'
+            'follow_count',
         )
 
     def get_recipes(self, object):
@@ -134,3 +135,6 @@ class SubscriptionShowSerializer(CustomUserSerializer):
 
     def get_recipes_count(self, object):
         return object.recipes.count()
+
+    def get_follow_count(self, object):
+        return object.subscriber.count()
