@@ -16,6 +16,12 @@ from backend.settings import (
 )
 from users.models import User
 
+COLOR_PALETTE = [
+    ("#00f040", "zavtrak", ),
+    ("#f0b400", "obed", ),
+    ("#ff0055", "uzhin", ),
+]
+
 
 class Tag(models.Model):
     """Класс тегов."""
@@ -28,7 +34,8 @@ class Tag(models.Model):
     )
 
     color = ColorField(
-        default='#FF0000',
+        default='#00f040',
+        choices=COLOR_PALETTE,
         max_length=TAG_COLOR_LENGHT,
         verbose_name='цвет',
         unique=True
@@ -182,10 +189,11 @@ class IngredientAmount(models.Model):
 
 # ------------------   начало    ---------------------
 class UserRecipeModel(models.Model):
+    """Абстрактная модель"""
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        verbose_name='Пользователь',
+        verbose_name='Пользователь'
     )
     recipe = models.ForeignKey(
         Recipe,
@@ -196,19 +204,18 @@ class UserRecipeModel(models.Model):
     class Meta:
         abstract = True
         ordering = ('recipe',)
+        constraints = [
+            models.UniqueConstraint(
+                fields=('user', 'recipe'),
+                name='unique favourite')]
 
 
 class Favorite(UserRecipeModel):
     """Класс для добавления рецептов в избранное."""
     class Meta:
-        # default_related_name = 'favoriting',
+        default_related_name = 'favoriting',
         verbose_name = 'Избранное'
         verbose_name_plural = 'Избранное'
-        ordering = ('user',)
-        constraints = [
-            models.UniqueConstraint(
-                fields=['user', 'recipe'], name='unique_favorite_recipe'),
-        ]
 
     def __str__(self):
         return f'{self.recipe.name} в избранном у {self.user.username}'
@@ -217,16 +224,9 @@ class Favorite(UserRecipeModel):
 class ShoppingCart(UserRecipeModel):
     """Класс для составления списка покупок."""
     class Meta:
-        # default_related_name = 'shopping_cart',
+        default_related_name = 'shopping_cart',
         verbose_name = 'Рецепт пользователя для списка покупок'
         verbose_name_plural = 'Рецепты пользователей для списка покупок'
-        ordering = ('user',)
-        constraints = (
-            models.UniqueConstraint(
-                fields=['user', 'recipe'],
-                name='unique_shopping_cart'
-            ),
-        )
 
     def __str__(self):
         return f'{self.recipe.name} в списке покупок у {self.user.username}'
