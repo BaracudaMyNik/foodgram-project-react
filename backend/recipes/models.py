@@ -180,23 +180,28 @@ class IngredientAmount(models.Model):
         return f'{self.recipe} содержит ингредиент/ты {self.ingredient}'
 
 
-class Favorite(models.Model):
-    """Класс для добавления рецептов в избранное."""
-
-    recipe = models.ForeignKey(
-        Recipe,
-        on_delete=models.CASCADE,
-        related_name='favoriting',
-        verbose_name='рецепт'
-    )
+# ------------------   начало    ---------------------
+class UserRecipeModel(models.Model):
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name='favoriting',
-        verbose_name='Пользователь'
+        verbose_name='Пользователь',
+    )
+    recipe = models.ForeignKey(
+        Recipe,
+        on_delete=models.CASCADE,
+        verbose_name='Рецепт',
     )
 
     class Meta:
+        abstract = True
+        ordering = ('recipe',)
+
+
+class Favorite(UserRecipeModel):
+    """Класс для добавления рецептов в избранное."""
+    class Meta:
+        # default_related_name = 'favoriting',
         verbose_name = 'Избранное'
         verbose_name_plural = 'Избранное'
         ordering = ('user',)
@@ -211,23 +216,10 @@ class Favorite(models.Model):
         return f'{self.recipe} в избранном у {self.user}'
 
 
-class ShoppingCart(models.Model):
+class ShoppingCart(UserRecipeModel):
     """Класс для составления списка покупок."""
-
-    recipe = models.ForeignKey(
-        Recipe,
-        on_delete=models.CASCADE,
-        related_name='shopping_cart',
-        verbose_name='рецепт'
-    )
-    user = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE,
-        related_name='shopping_cart',
-        verbose_name='Пользователь'
-    )
-
     class Meta:
+        # default_related_name = 'shopping_cart',
         verbose_name = 'Рецепт пользователя для списка покупок'
         verbose_name_plural = 'Рецепты пользователей для списка покупок'
         ordering = ('user',)
@@ -240,3 +232,5 @@ class ShoppingCart(models.Model):
 
     def __str__(self):
         return f'{self.recipe} в списке покупок у {self.user}'
+
+    # ------------------   конец    ---------------------
