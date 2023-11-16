@@ -104,8 +104,8 @@ class Recipe(models.Model):
         max_length=RECIPE_NAME_MAX_LENGHT,
         verbose_name='Hазвание',
         validators=[RegexValidator(
-            regex=r'^[а-яА-ЯёЁ]',
-            message='Не допустимо в начале использовать цифры!'
+            regex=r'^[a-zA-Zа-яА-ЯЁё\s]+[\d]+$',
+            message='Не допустимое название!'
         )],
         db_index=True
     )

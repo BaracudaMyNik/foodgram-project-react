@@ -20,17 +20,25 @@ class User(AbstractUser):
         unique=True,
         db_index=True,
         validators=[RegexValidator(
-            regex=r'^[\w.@+-]+$',
+            regex=r'^^[a-zA-Zа-яА-ЯЁё]+$',
             message='Имя пользователя содержит недопустимый символ'
         )]
     )
     first_name = models.CharField(
         max_length=MAX_NAME_LENGHT,
-        verbose_name='имя'
+        verbose_name='имя',
+        validators=[RegexValidator(
+            regex=r'^^[a-zA-Zа-яА-ЯЁё]+$',
+            message='Имя пользователя содержит недопустимый символ'
+        )]
     )
     last_name = models.CharField(
         max_length=MAX_NAME_LENGHT,
-        verbose_name='фамилия'
+        verbose_name='фамилия',
+        validators=[RegexValidator(
+            regex=r'^^[a-zA-Zа-яА-ЯЁё]+$',
+            message='Имя пользователя содержит недопустимый символ'
+        )]
     )
     password = models.CharField(
         max_length=MAX_NAME_LENGHT,
@@ -82,10 +90,6 @@ class Subscription(models.Model):
             models.UniqueConstraint(
                 fields=['author', 'subscriber'],
                 name='unique_subscription'
-            ),
-            models.CheckConstraint(
-                name="%(app_label)s_%(class)s_prevent_self_follow",
-                check=~models.Q(subscriber=models.F("author")),
             ),
         ]
 
