@@ -76,7 +76,7 @@ class SubscriptionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Subscription
-        fields = ('subscriber', 'author')
+        fields = '__all__'
         validators = [
             UniqueTogetherValidator(
                 queryset=Subscription.objects.all(),
