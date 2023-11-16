@@ -124,7 +124,7 @@ class SubscriptionShowSerializer(CustomUserSerializer):
             'last_name',
             'is_subscribed',
             'recipes',
-            'follow_count',
+            'follow_count'
         )
 
     def get_recipes(self, object):
