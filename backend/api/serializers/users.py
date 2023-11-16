@@ -58,7 +58,7 @@ class CustomUserSerializer(UserSerializer):
 
     def validate(self, data):
         """Запрещает пользователям изменять себе username на me."""
-        if data.get('username') == 'me':
+        if data.get('username') == 'me' or data.get('username') == 'Me':
             raise serializers.ValidationError(
                 'Использовать имя me запрещено'
             )
@@ -76,7 +76,7 @@ class SubscriptionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Subscription
-        fields = '__all__'
+        fields = ('id', 'subscriber', 'author')
         validators = [
             UniqueTogetherValidator(
                 queryset=Subscription.objects.all(),
